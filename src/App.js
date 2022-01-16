@@ -10,15 +10,15 @@ function App() {
   const [rowsPerPage] = useState(20);
   const [filteredData, setFilteredData] = useState(TableData);
 
-  const lastRowIndex = currentPage * rowsPerPage;
-  const firstRowIndex = lastRowIndex - rowsPerPage;
-  const currentRows = filteredData.slice(firstRowIndex, lastRowIndex);
+  const lastRowIndex = currentPage * rowsPerPage; //Последний индекс элемента таблицы на странице (для пагинации)
+  const firstRowIndex = lastRowIndex - rowsPerPage; //Первый индекс элемента таблицы на странице (для пагинации)
+  const currentRows = filteredData.slice(firstRowIndex, lastRowIndex); //Массив с элементами на странице взависимости от номера страницы
 
 
   const changePage = (pageNumber) => {
     setCurrentPage(pageNumber);
     console.log(pageNumber)
-  }
+  }  //Функция смены номера страницы
 
   return (
     <Context.Provider value = {{ filteredData, currentRows, setFilteredData }}>

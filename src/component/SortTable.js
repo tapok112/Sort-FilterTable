@@ -11,14 +11,14 @@ const SortTable = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const sortThisProp = (prop) => {
 
-        if (direction === 'ASC') {
+        if (direction === 'ASC') { //Сортировка по возрастанию
             const compare = [...filteredData].sort((a, b) => 
             a[prop] > b[prop] ? 1 : - 1);
             setFilteredData(compare);
-            setDirection('DESC');
+            setDirection('DESC'); 
         }
 
-        if (direction === 'DESC') {
+        if (direction === 'DESC') { //Сортировка по убыванию
             const compare = [...filteredData].sort((a, b) => 
             a[prop] < b[prop] ? 1 : - 1);
             setFilteredData(compare);
@@ -30,10 +30,9 @@ const SortTable = () => {
     }
     const setOper = (e) => {
         setOperator(e.target.value);
-        console.log(operator);
     }
 
-    const dataFilter = () => {
+    const dataFilter = () => { //Фильтрация по значению в поисковой строке, взависимости от выбранного оператора и колонки
         setFilteredData(data.filter((val) => {
 
             switch (operator) { 
@@ -63,19 +62,11 @@ const SortTable = () => {
 
     useEffect(() => {
         setOperator('include');
-    },[collumn]);
+    },[collumn]); //При смене колонки в выпадающем списке- изменение значения оператора на "содержит"
 
     useEffect(() => {
         dataFilter();
-    },[searchTerm])
-
-    useEffect(() => {
-        dataFilter();
-    },[operator])
-
-    useEffect(() => {
-        dataFilter();
-    },[collumn])
+    },[searchTerm, operator, collumn]) //Рендер при изменении значений поисковой строки и выпадающих списков
 
     return (
         <div className={styles.container}>
